@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Lead Generation System
 
-## Getting Started
+A simple lead generation system with admin panel built for a case study task.
 
-First, run the development server:
+## 🚀 Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Frontend**: Next.js 15 (App Router), React, TypeScript, Tailwind CSS
+- **Backend**: Next.js API Routes
+- **Validation**: Zod
+- **Storage**: In-memory (array)
+
+## 📋 Features
+
+- Landing page with business intro
+- Lead submission form with validation
+- REST API for lead management
+- Admin panel with authentication
+- Filter leads by service type
+
+## 🔌 API Routes
+
+### `POST /api/leads`
+Create a new lead
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "phone": "1234567890",
+  "serviceType": "Consulting"
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### `GET /api/leads`
+Get all leads
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### `GET /api/leads?serviceType=Consulting`
+Filter leads by service type
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔐 Admin Credentials
 
-## Learn More
+- **Username**: `admin`
+- **Password**: `admin123`
 
-To learn more about Next.js, take a look at the following resources:
+## 🏃 Running Locally
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm install
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Visit:
+- Landing page: http://localhost:3000
+- Admin panel: http://localhost:3000/admin
 
-## Deploy on Vercel
+## 📦 Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Deploy to Vercel:
+```bash
+vercel --prod
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ⏱️ What I'd Improve With More Time
+
+1. **Persistent Storage**: Use PostgreSQL/MongoDB instead of in-memory
+2. **Authentication**: Implement JWT-based auth with secure sessions
+3. **Email Notifications**: Send confirmation emails to leads
+4. **Export Feature**: Allow admins to export leads as CSV
+5. **Analytics Dashboard**: Add charts for lead statistics
+6. **Form Enhancement**: Add CAPTCHA and better error handling
+7. **Testing**: Add unit and integration tests
+8. **Pagination**: For large lead datasets
+9. **Search**: Full-text search across all lead fields
+10. **Responsive Design**: Better mobile optimization
+
+## 📝 Notes
+
+- This uses dummy data only
+- In-memory storage resets on server restart
+- Hardcoded credentials for demo purposes only
