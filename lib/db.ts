@@ -1,7 +1,4 @@
-import fs from 'fs';
-import path from 'path';
-
-// In-memory database for leads
+// In-memory database for leads (Vercel-compatible)
 export type Lead = {
   id: string;
   name: string;
@@ -11,37 +8,12 @@ export type Lead = {
   createdAt: string;
 };
 
-const DB_FILE = path.join(process.cwd(), 'data', 'leads.json');
-
-// Ensure data directory exists
-const ensureDataDir = () => {
-  const dir = path.dirname(DB_FILE);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
-};
-
-// Read leads from JSON file
-const readLeads = (): Lead[] => {
-  ensureDataDir();
-  if (!fs.existsSync(DB_FILE)) {
-    return [];
-  }
-  const data = fs.readFileSync(DB_FILE, 'utf-8');
-  return JSON.parse(data);
-};
-
-// Write leads to JSON file
-const writeLeads = (leads: Lead[]) => {
-  ensureDataDir();
-  fs.writeFileSync(DB_FILE, JSON.stringify(leads, null, 2));
-};
+// Use in-memory storage for serverless deployment
+let leads: Lead[] = [];
 
 export const db = {
-  getLeads: () => readLeads(),
+  getLeads: () => leads,
   addLead: (lead: Omit<Lead, 'id' | 'createdAt'>) => {
-    const leads = readLeads();
-    
     // Check if email already exists
     const emailExists = leads.some(existingLead => existingLead.email === lead.email);
     if (emailExists) {
@@ -60,9 +32,8 @@ export const db = {
       createdAt: new Date().toISOString(),
     };
     leads.push(newLead);
-    writeLeads(leads);
     return newLead;
   },
   filterByService: (serviceType: string) => 
-    readLeads().filter(lead => lead.serviceType === serviceType),
+    leads.filter(lead => lead.serviceType === serviceType),
 };

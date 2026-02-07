@@ -7,8 +7,9 @@ A simple lead generation system with admin panel built for a case study task.
 - **Frontend**: Next.js 16 (App Router), React, TypeScript, Tailwind CSS
 - **Backend**: Next.js API Routes
 - **Validation**: Zod
-- **Storage**: JSON File (Persistent)
+- **Storage**: In-memory (Serverless-compatible)
 - **Authentication**: localStorage (Demo purposes)
+- **Deployment**: Vercel
 
 ## 📋 Features
 
@@ -166,9 +167,10 @@ vercel --prod
 ## 📝 Notes
 
 - This uses dummy data only for demonstration purposes
-- JSON file storage is suitable for MVP/prototype but not production-ready
+- **In-memory storage**: Data resets when serverless function restarts (Vercel limitation)
+- For local development with persistent data, you can use JSON file storage
 - Hardcoded credentials are for demo only - never use in production
-- For production, implement proper authentication, database, and security measures
+- For production, implement proper database (MongoDB/PostgreSQL), authentication, and security measures
 
 ## 📄 License
 
